@@ -1,0 +1,87 @@
+<phone:PhoneApplicationPage
+    x:Class="MathClock.AlarmPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True"
+    Style="{StaticResource TransitionPageStyle}">
+    
+    <phone:PhoneApplicationPage.Resources>
+    </phone:PhoneApplicationPage.Resources>
+    
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock x:Name="ApplicationTitle" Text="SET ALARM" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="alarmTimeTextBlock" Text="set alarm" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" HorizontalAlignment="Left" FontSize="48"/>
+            <TextBlock Text=" " />
+            
+        </StackPanel>
+        
+        <ScrollViewer Grid.Row="1">
+            <StackPanel Margin="{StaticResource PhoneMargin}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <toolkit:TimePicker x:Name="timePicker" ValueChanged="timePicker_ValueChanged"/>
+                    <toolkit:ToggleSwitch x:Name="alarmToggleSwitch" 
+                            Grid.Row="1"
+                            Unchecked="alarmToggleSwitch_ValueChange"
+                            Checked="alarmToggleSwitch_ValueChange"
+                            Content="Alarm OFF / ON"/>
+                    <TextBlock Text="adjust direction" Grid.Row="1" Margin="14,75,-14,51" Grid.RowSpan="2" Foreground="{StaticResource PhoneBorderBrush}"/>
+                    <toolkit:ToggleSwitch x:Name="hourFmtToggleSwitch" Content="24 Hour Clock: ON" 
+                                          Grid.Row="0" IsChecked="True" FontSize="24"
+                                          Unchecked="ToggleSwitch_UnChecked"
+                                          Checked="ToggleSwitch_Checked"/>
+                    <toolkit:ToggleSwitch x:Name="secFmtToggleSwitch" Content="Show Seconds: ON"
+                                          Grid.Row="1" IsChecked="True" FontSize="24"
+                                          Unchecked="ToggleSwitch_UnChecked"
+                                          Checked="ToggleSwitch_Checked"/>
+                    <toolkit:ToggleSwitch x:Name="vibrationToggleSwitch" Content="Enable Vibration: ON"
+                                          Grid.Row="2" IsChecked="True" FontSize="24"
+                                          Unchecked="ToggleSwitch_UnChecked"
+                                          Checked="ToggleSwitch_Checked"/>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0"></Grid>
+    </Grid>
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton x:Name="alarmButton"
+                                            IconUri="/Toolkit.Content/ApplicationBar.Check.png"
+                                            Text="Set Alarm"
+                                            Click="SetAlarmButton_Click"/>
+            <shell:ApplicationBarIconButton x:Name="cancelButton"
+                                            IconUri="/Toolkit.Content/ApplicationBar.Cancel.png"
+                                            Text="Cancel"
+                                            Click="Cancel_Click"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+</phone:PhoneApplicationPage>
